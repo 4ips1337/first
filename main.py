@@ -1,9 +1,7 @@
-val = 'a'
-try:
-    val = int(val)
-except ValueError:
-    print(f"val {val} is not a number")
-else:
-    print(val > 0)
-finally:
-    print("This will be printed anyway")
+from count import total_salary
+
+def main():
+    return print(total_salary('test.txt'))
+
+if __name__ == "__main__":
+    main()
