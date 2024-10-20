@@ -35,5 +35,6 @@ def get_cats_info(path):
         print(f"Невідома помилка: {e}")
     
     return cats
+
 result = get_cats_info('2.txt')
 print(result)
