@@ -24,5 +24,5 @@ def total_salary(path):
         print(f"Сталася помилка: {e}")
 
 
-result = total_salary('test.txt')
+result = total_salary('1.txt')
 print(result)
