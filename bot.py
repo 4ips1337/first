@@ -1,3 +1,4 @@
+
 contacts = {}
 
 
@@ -5,24 +6,36 @@ def hello():
     return "How can I help you?"
 
 
-def add_contact(name, phone):
-    contacts[name] = phone
-    return "Contact added."
-
-
-def change_contact(name, new_phone):
-    if name in contacts:
-        contacts[name] = new_phone
-        return "Contact updated."
+def add_contact(*args):
+    if len(args) == 2:
+        name, phone = args
+        contacts[name] = phone
+        return "Contact added."
     else:
-        return f"Error: contact {name} not found."
+        return "Error: command format should be 'add <name> <phone number>'"
 
 
-def show_phone(name):
-    if name in contacts:
-        return contacts[name]
+def change_contact(*args):
+    if len(args) == 2:
+        name, new_phone = args
+        if name in contacts:
+            contacts[name] = new_phone
+            return "Contact updated."
+        else:
+            return f"Error: contact {name} not found."
     else:
-        return f"Error: contact {name} not found."
+        return "Error: command format should be 'change <name> <new phone number>'"
+
+
+def show_phone(*args):
+    if len(args) == 1:
+        name = args[0]
+        if name in contacts:
+            return contacts[name]
+        else:
+            return f"Error: contact {name} not found."
+    else:
+        return "Error: command format should be 'phone <name>'"
 
 
 def show_all_contacts():
@@ -36,7 +49,7 @@ def main():
     print("Welcome to the assistant bot!")
     
     while True:
-        
+       
         user_input = input("Enter command: ").strip()
         command, *args = user_input.split()
 
@@ -48,25 +61,13 @@ def main():
             print(hello())
         
         elif command == "add":
-            if len(args) == 2:
-                name, phone = args
-                print(add_contact(name, phone))
-            else:
-                print("Error: command format should be 'add <name> <phone number>'")
+            print(add_contact(*args))
         
         elif command == "change":
-            if len(args) == 2:
-                name, new_phone = args
-                print(change_contact(name, new_phone))
-            else:
-                print("Error: command format should be 'change <name> <new phone number>'")
+            print(change_contact(*args))
         
         elif command == "phone":
-            if len(args) == 1:
-                name = args[0]
-                print(show_phone(name))
-            else:
-                print("Error: command format should be 'phone <name>'")
+            print(show_phone(*args))
         
         elif command == "all":
             print(show_all_contacts())
